@@ -16,20 +16,20 @@ int numero_pao = 0;
 
 void thread_padeiro(void *p1, void *p2, void *p3) {
     while(1){
-        k_msleep(1000);
         numero_pao++;
         buffer[saldo_vitrine] = numero_pao;
         saldo_vitrine++;
         LOG_INF("PADEIRO: Pão #%d pronto (Saldo vitrine = %d)", buffer[saldo_vitrine-1], saldo_vitrine);
+        k_msleep(1000);
     }
 }
 
 void thread_cliente(void *p1, void *p2, void *p3) {
     while(1) {
-        k_msleep(1500);
         buffer[saldo_vitrine] = 0;
         saldo_vitrine--;
         LOG_INF("CLIENTE: Peguei pão #%d (Saldo vitrine = %d)", buffer[saldo_vitrine], saldo_vitrine);
+        k_msleep(1500);
     }
 }
 
