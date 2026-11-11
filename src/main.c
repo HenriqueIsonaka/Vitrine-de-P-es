@@ -15,21 +15,27 @@ int numero_pao = 0;
 
 
 void thread_padeiro(void *p1, void *p2, void *p3) {
+    int saldo_padeiro;
     while(1){
+        saldo_padeiro = saldo_vitrine;
         numero_pao++;
         buffer[saldo_vitrine] = numero_pao;
-        saldo_vitrine++;
-        LOG_INF("PADEIRO: Pão #%d pronto (Saldo vitrine = %d)", buffer[saldo_vitrine-1], saldo_vitrine);
+        saldo_padeiro++;
         k_msleep(1000);
+        saldo_vitrine = saldo_padeiro;
+        LOG_INF("PADEIRO: Pão #%d pronto (Saldo vitrine = %d)", buffer[saldo_vitrine-1], saldo_vitrine);
     }
 }
 
 void thread_cliente(void *p1, void *p2, void *p3) {
+    int saldo_cliente;   
     while(1) {
-        buffer[saldo_vitrine] = 0;
-        saldo_vitrine--;
-        LOG_INF("CLIENTE: Peguei pão #%d (Saldo vitrine = %d)", buffer[saldo_vitrine], saldo_vitrine);
+        saldo_cliente = saldo_vitrine;
+        saldo_cliente--;
         k_msleep(1500);
+        saldo_vitrine = saldo_cliente;
+        LOG_INF("CLIENTE: Peguei pão #%d (Saldo vitrine = %d)", buffer[saldo_vitrine+1], saldo_vitrine);
+        buffer[saldo_vitrine+1] = 0;
     }
 }
 
