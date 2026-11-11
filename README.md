@@ -7,4 +7,7 @@
 - A thread do padeiro parece estar vencendo a corrida, porque ela é a primeira thread a executar um looping completo.
 
 2. 
-O problema acontece porque as duas threads pegam uma única versão da variável global e modificam ela paralalemente de forma que o valor da última que termina de utilizá-la sobrepõe o valor da primeira. Isso ocorre pois ambas trabalham com um valor desatualizado dessa variável global que não considera as modificações que a outra thread faz a ela.
+O problema acontece porque as duas threads pegam uma única versão da variável global e modificam ela paralalemente de forma que o valor da última que termina de utilizá-la sobrepõe o valor da primeira. Isso ocorre pois ambas trabalham com um valor desatualizado dessa variável global que não considera as modificações que a outra thread faz a ela. Dessa forma, como as duas threads competem por esse mesmo recurso, que é a variável global, e uma anula as modificações feitas pela outra, esse é um caso de Race Condition.
+
+Resultado no monitor serial:
+<img width="1600" height="1200" alt="WhatsApp Image 2026-11-11 at 13 15 48" src="https://github.com/user-attachments/assets/9f179b67-c0e4-4a96-a875-5082209a20db" />
